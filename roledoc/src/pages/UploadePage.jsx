@@ -1,6 +1,6 @@
-// UploadPage.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/Upload.css";
 
 export default function UploadPage() {
   const [file, setFile] = useState(null);
@@ -47,7 +47,7 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
+    <div className="main-content min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-lg text-center">
         <h1 className="text-3xl font-bold mb-4 text-gray-800">Upload a Document</h1>
         <p className="text-gray-500 mb-6">PDF, DOCX, or TXT only.</p>
