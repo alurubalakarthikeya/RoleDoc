@@ -7,7 +7,6 @@ export default function UploadPage() {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
-
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -23,10 +22,8 @@ export default function UploadPage() {
       }
     }
   };
-
   const handleUpload = () => {
     if (!file) return alert("Please select a file first!");
-
     setUploading(true);
     let prog = 0;
     const interval = setInterval(() => {
@@ -45,7 +42,6 @@ export default function UploadPage() {
       }
     }, 100);
   };
-
   return (
     <div className="main-content min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-lg text-center">
@@ -58,7 +54,7 @@ export default function UploadPage() {
         {file && !uploading && (
           <button
             onClick={handleUpload}
-            className="mt-6 w-full bg-purple-600 text-white py-2 px-4 rounded-xl hover:bg-purple-700 transition"
+            className="button-now"
           >
             Upload & Continue
           </button>

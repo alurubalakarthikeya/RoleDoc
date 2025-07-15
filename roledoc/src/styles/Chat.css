@@ -2,6 +2,14 @@
 * {
   font-family: "TikTok Sans", sans-serif;
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 .chat-wrapper {
   background: linear-gradient(to bottom right, #f3e8ff, #ffffff, #e9d5ff);
   max-height: 89vh;
@@ -13,6 +21,7 @@
 }
 
 .chat-container {
+  box-sizing: border-box;
   width: 30%;
   max-width: 650px;
   height: 80vh;
@@ -28,7 +37,7 @@
 .chat-header {
   background-color: #9333ea;
   color: white;
-  padding: 1rem 1.5rem;
+  padding: 1px 10px;
   font-weight: bold;
   font-size: 1.1rem;
   display: flex;
@@ -40,6 +49,7 @@
   flex: 1;
   overflow-y: auto;
   padding: 1.5rem;
+  width: 100%;
 }
 
 .chat-messages::-webkit-scrollbar {
@@ -61,8 +71,8 @@
 }
 
 .message-user {
-    width: 100%;
-  background-color: #7b00ff;
+  width: 100%;
+  background-color: #c084fc;
   align-self: flex-end;
   text-align: right;
 }
@@ -103,7 +113,7 @@
   padding: 0.6rem 1rem;
   border-radius: 9999px;
   outline: none;
-  background-color: #6b21a8;
+  background-color: #9333ea;
   color: white;
 }
 
@@ -114,6 +124,7 @@
 
 .chat-input::placeholder {
   color: #ffffff;
+  font-family: "TikTok Sans", sans-serif;
 }
 
 .send-btn {
@@ -190,7 +201,7 @@
 
 @media (max-width: 768px) {
   .chat-wrapper {
-    height: 200vh;
+    height: 500vh;
     flex-direction: column;
     gap: 30px;
 
@@ -198,11 +209,13 @@
   .chat-container,
   .doc-container {
     width: 100%;
-    border-radius: 0;
+    border-radius: 20px;
+    height: 100vh;
   }
 
   .doc-container {
     min-height: 90vh;
+    display: none;
   }
 }
 
@@ -270,3 +283,64 @@ select:focus {
 }
 
 
+.docProfile {
+  height: 25px;
+  width: 25px;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .chat-wrapper {
+    flex-direction: column;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+  }
+
+  .chat-container {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+  }
+
+  .doc-container {
+    display: none;
+  }
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ensure full height */
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.chat-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 93%;
+  background-color: white;
+  padding: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  border-top: 1px solid #eee;
+}
+
+}

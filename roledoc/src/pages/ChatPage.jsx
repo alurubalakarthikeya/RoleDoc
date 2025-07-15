@@ -2,10 +2,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../styles/Chat.css";
+import docProfIcon from "../assets/docprof.png";
 
 export default function ChatPage() {
   const location = useLocation();
-  const fileName = location.state?.fileName || "RoleDoc";
+  const rawFileName = location.state?.fileName || "RoleDoc";
+  const fileName = rawFileName.replace(/\.[^/.]+$/, "");
   const fileUrl = location.state?.fileUrl;
 
   const [messages, setMessages] = useState([
@@ -62,7 +64,7 @@ export default function ChatPage() {
     <div className="chat-wrapper">
       <div className="chat-container">
         <div className="chat-header">
-          <span>📄 Chat with: {fileName}</span>
+          <span className="centered"><img src={docProfIcon} alt="Document Icon" className="docProfile" /><h3>{fileName}</h3></span>
           <select value={persona} onChange={(e) => setPersona(e.target.value)}>
             <option value="Friendly">Friendly</option>
             <option value="Formal">Formal</option>
