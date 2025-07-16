@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Upload.css";
+import Navbar from "../pages/Navbar";
+
 
 export default function UploadPage() {
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -22,6 +25,7 @@ export default function UploadPage() {
       }
     }
   };
+
   const handleUpload = () => {
     if (!file) return alert("Please select a file first!");
     setUploading(true);
@@ -42,35 +46,43 @@ export default function UploadPage() {
       }
     }, 100);
   };
+
   return (
-    <div className="main-content min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
-      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-lg text-center">
-        <h1 className="text-3xl font-bold mb-4 text-gray-800">Upload a Document</h1>
-        <p className="text-gray-500 mb-6">PDF, DOCX, or TXT only.</p>
-        <label className="w-full border-2 border-dashed border-purple-400 rounded-xl p-6 cursor-pointer hover:bg-purple-50 transition">
-          <input type="file" accept=".pdf,.docx,.txt" onChange={handleFileChange} className="hidden" />
-          <p className="text-gray-600">{file ? file.name : "Click or drag a file here to upload"}</p>
+    <div className="main-content">
+      <Navbar hideLinks={["Home", "Upload"]} />
+      <div className="upload-box">
+        <h1 className="upload-title">Upload a Document</h1>
+        <p className="upload-subtitle">PDF, DOCX, or TXT only.</p>
+
+        <label className="upload-label">
+          <input
+            type="file"
+            accept=".pdf,.docx,.txt"
+            onChange={handleFileChange}
+            className="hidden-input"
+          />
+          <p>{file ? file.name : "Click or drag a file here to upload"}</p>
         </label>
+
         {file && !uploading && (
-          <button
-            onClick={handleUpload}
-            className="button-now"
-          >
+          <button onClick={handleUpload} className="button-now">
             Upload & Continue
           </button>
         )}
+
         {uploading && (
-          <div className="mt-6 w-full">
-            <div className="bg-purple-100 rounded-full h-4 overflow-hidden">
+          <div className="progress-section">
+            <div className="progress-bar">
               <div
-                className="bg-purple-600 h-full transition-all duration-200"
+                className="progress-fill"
                 style={{ width: `${progress}%` }}
               ></div>
             </div>
-            <p className="text-sm text-gray-500 mt-2">{progress}% uploaded</p>
+            <p className="progress-text">{progress}% uploaded</p>
           </div>
         )}
       </div>
     </div>
   );
 }
+

@@ -12,12 +12,12 @@ html, body {
 
 .chat-wrapper {
   background: linear-gradient(to bottom right, #f3e8ff, #ffffff, #e9d5ff);
-  max-height: 89vh;
+  max-height: 90vh;
   padding: 2rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  min-width: 95.5vw;
+  min-width: 96vw;
 }
 
 .chat-container {
@@ -32,6 +32,7 @@ html, body {
   flex-direction: column;
   overflow: hidden;
   border: 1px solid #e9d5ff;
+  color: #8e44ec;
 }
 
 .chat-header {
