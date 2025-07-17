@@ -14,8 +14,8 @@
 
 ## Features:
 
-- 👾 **Document Chat Interface** – Where chat is role played as document  
-- 🕊️ **Multiple Modes** – Friendly, Formal, Sarcastic, Motivational tones  
-- 🫧 **Supports PDF, DOCX, TXT** – Upload and preview various file types  
-- 🍀 **Split Screen UI** – Chat on the left, document view on the right   
-- 🍄 **Integration** – Smart answers powered by AI
+👾 **Document Chat Interface** – Where chat is role played as document  
+🕊️ **Multiple Modes** – Friendly, Formal, Sarcastic, Motivational tones  
+🫧 **Supports PDF, DOCX, TXT** – Upload and preview various file types  
+🍀 **Split Screen UI** – Chat on the left, document view on the right   
+🍄 **Integration** – Smart answers powered by AI
