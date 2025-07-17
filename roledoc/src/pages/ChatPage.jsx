@@ -1,4 +1,4 @@
-// ChatPage.jsx
+// src/pages/ChatPage.jsx
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../styles/Chat.css";
@@ -18,7 +18,7 @@ export default function ChatPage() {
   const [persona, setPersona] = useState("Friendly");
   const chatRef = useRef(null);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
 
     const userMsg = { type: "user", text: input };
@@ -26,27 +26,33 @@ export default function ChatPage() {
     setInput("");
     setIsTyping(true);
 
-    setTimeout(() => {
-      const docResponse = {
-        type: "doc",
-        text: getPersonaResponse(input),
-      };
-      setMessages((prev) => [...prev, docResponse]);
-      setIsTyping(false);
-    }, 1200);
-  };
+    try {
+      const response = await fetch(`http://localhost:8000/query?q=${encodeURIComponent(input)}`);
+      const data = await response.json();
 
-  const getPersonaResponse = (question) => {
-    switch (persona) {
-      case "Formal":
-        return `You inquired: "${question}". I shall assist you accordingly.`;
-      case "Sarcastic":
-        return `Oh wow, never heard *that* one before. "${question}"? Groundbreaking. 😏`;
-      case "Motivational":
-        return `Great question! "${question}" shows you're truly curious. Keep going! 💪`;
-      case "Friendly":
-      default:
-        return `You asked: "${question}". Here's what I think! 😊`;
+      let botResponse = data?.results?.[0] || "Sorry, I couldn't find an answer.";
+
+      // Style it with persona
+      switch (persona) {
+        case "Formal":
+          botResponse = `You asked: "${input}". Here is what I found: ${botResponse}`;
+          break;
+        case "Sarcastic":
+          botResponse = `Wow, "${input}" again? Here's what the doc *thinks*: ${botResponse} 🙄`;
+          break;
+        case "Motivational":
+          botResponse = `Keep up the curiosity! About "${input}": ${botResponse} 💪`;
+          break;
+        default:
+          botResponse = `You asked: "${input}". Here's what I think! 😊 ${botResponse}`;
+      }
+
+      const docMsg = { type: "doc", text: botResponse };
+      setMessages((prev) => [...prev, docMsg]);
+    } catch (err) {
+      setMessages((prev) => [...prev, { type: "doc", text: "⚠️ Error talking to backend." }]);
+    } finally {
+      setIsTyping(false);
     }
   };
 
@@ -64,7 +70,10 @@ export default function ChatPage() {
     <div className="chat-wrapper">
       <div className="chat-container">
         <div className="chat-header">
-          <span className="centered"><img src={docProfIcon} alt="Document Icon" className="docProfile" /><h3>{fileName}</h3></span>
+          <span className="centered">
+            <img src={docProfIcon} alt="Document Icon" className="docProfile" />
+            <h3>{fileName}</h3>
+          </span>
           <select value={persona} onChange={(e) => setPersona(e.target.value)}>
             <option value="Friendly">Friendly</option>
             <option value="Formal">Formal</option>
@@ -72,19 +81,19 @@ export default function ChatPage() {
             <option value="Motivational">Motivational</option>
           </select>
         </div>
+
         <div ref={chatRef} className="chat-messages">
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`message-bubble ${
-                msg.type === "user" ? "message-user" : "message-doc"
-              }`}
+              className={`message-bubble ${msg.type === "user" ? "message-user" : "message-doc"}`}
             >
               <strong>{msg.type === "user" ? "You" : "RoleDoc"}:</strong> {msg.text}
             </div>
           ))}
           {isTyping && <div className="typing-indicator">{fileName} is typing...</div>}
         </div>
+
         <div className="chat-footer">
           <input
             type="text"

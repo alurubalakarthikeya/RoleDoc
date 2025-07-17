@@ -1,8 +1,8 @@
+// src/pages/UploadPage.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Upload.css";
 import Navbar from "../pages/Navbar";
-
 
 export default function UploadPage() {
   const [file, setFile] = useState(null);
@@ -26,25 +26,42 @@ export default function UploadPage() {
     }
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (!file) return alert("Please select a file first!");
     setUploading(true);
-    let prog = 0;
-    const interval = setInterval(() => {
-      prog += 10;
-      setProgress(prog);
-      if (prog >= 100) {
-        clearInterval(interval);
-        setTimeout(() => {
-          navigate("/chat", {
-            state: {
-              fileName: file.name,
-              fileUrl: URL.createObjectURL(file),
-            },
-          });
-        }, 500);
-      }
-    }, 100);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://localhost:8000/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error("Upload failed");
+
+      // Animate fake progress
+      let prog = 0;
+      const interval = setInterval(() => {
+        prog += 10;
+        setProgress(prog);
+        if (prog >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            navigate("/chat", {
+              state: {
+                fileName: file.name,
+                fileUrl: URL.createObjectURL(file),
+              },
+            });
+          }, 500);
+        }
+      }, 100);
+    } catch (err) {
+      alert("Something went wrong while uploading the file.");
+      setUploading(false);
+    }
   };
 
   return (
@@ -85,4 +102,3 @@ export default function UploadPage() {
     </div>
   );
 }
-
