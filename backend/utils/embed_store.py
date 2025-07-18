@@ -12,9 +12,34 @@ if not os.path.exists(VECTOR_DIR):
     os.makedirs(VECTOR_DIR)
 
 def embed_and_store(text, file_name):
-    # Split into chunks
-    chunks = [text[i:i+500] for i in range(0, len(text), 500)]
-    embeddings = model.encode(chunks)
+    import re
+    import textwrap
+
+    # Split text using heading-like patterns
+    section_pattern = r"(?:\n|^)(\d[\d\.]*[\)\.]?|Step \d+|Section \d+)[^\n]*\n"
+    sections = re.split(section_pattern, text)
+
+    structured_chunks = []
+    i = 0
+    while i < len(sections):
+        if re.match(section_pattern, sections[i]):
+            heading = sections[i].strip()
+            if i + 1 < len(sections):
+                content = sections[i + 1].strip()
+                full_text = f"{heading}: {content}"
+                # Wrap cleanly into ~450-character chunks without breaking words
+                chunks = textwrap.wrap(full_text, width=450, break_long_words=False, break_on_hyphens=False)
+                structured_chunks.extend(chunks)
+                i += 2
+            else:
+                i += 1
+        else:
+            plain = sections[i].strip()
+            chunks = textwrap.wrap(plain, width=450, break_long_words=False, break_on_hyphens=False)
+            structured_chunks.extend(chunks)
+            i += 1
+
+    embeddings = model.encode(structured_chunks)
 
     # Create FAISS index
     dimension = embeddings.shape[1]
@@ -24,9 +49,11 @@ def embed_and_store(text, file_name):
     # Save index
     faiss.write_index(index, os.path.join(VECTOR_DIR, f"{file_name}.index"))
 
-    # Save chunks for later retrieval
+    # Save chunks for retrieval
     with open(os.path.join(VECTOR_DIR, f"{file_name}_chunks.pkl"), "wb") as f:
-        pickle.dump(chunks, f)
+        pickle.dump(structured_chunks, f)
+
+
 
 def query_vector_store(query, file_name, top_k=3):
     # Load index and chunks

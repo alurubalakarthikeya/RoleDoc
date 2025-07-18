@@ -16,6 +16,17 @@ def load_faiss_index():
     texts = np.load(TEXT_PATH, allow_pickle=True)
     return index, texts
 
-def search_index(index, query_vector, texts, top_k=5):
+def search_index(index, query_vector, texts, top_k=5, query_text=None):
     D, I = index.search(query_vector, top_k)
-    return [texts[i] for i in I[0] if i < len(texts)]
+    results = [texts[i] for i in I[0] if i < len(texts)]
+
+    # Optional soft rerank by checking for keyword overlap
+    if query_text:
+        query_keywords = set(query_text.lower().split())
+        def score(text):
+            text_words = set(text.lower().split())
+            overlap = query_keywords & text_words
+            return len(overlap)
+        results.sort(key=score, reverse=True)  # Higher overlap gets priority
+
+    return results
