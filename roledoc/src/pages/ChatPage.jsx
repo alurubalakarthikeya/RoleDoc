@@ -16,43 +16,58 @@ export default function ChatPage() {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [persona, setPersona] = useState("Friendly");
+  const [pendingQuery, setPendingQuery] = useState(false);
   const chatRef = useRef(null);
 
   const handleSend = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || pendingQuery) return; // Prevent sending if waiting for reply
 
     const userMsg = { type: "user", text: input };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setIsTyping(true);
+    setPendingQuery(true);
 
     try {
-      const response = await fetch(`http://localhost:8000/query?q=${encodeURIComponent(input)}`);
-      const data = await response.json();
+      const formData = new FormData();
+      formData.append("query", input);
+      formData.append("file_name", rawFileName);
 
-      let botResponse = data?.results?.[0] || "Sorry, I couldn't find an answer.";
+      const response = await fetch("http://localhost:8000/query", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      let botResponse = data?.result || "Sorry, I couldn't find an answer.";
+
+      const trimmedInput = input.trim(); // Trim input for cleaner reply
 
       // Style it with persona
       switch (persona) {
         case "Formal":
-          botResponse = `You asked: "${input}". Here is what I found: ${botResponse}`;
+          botResponse = `You asked: "${trimmedInput}". Here is what I found: ${botResponse}`;
           break;
         case "Sarcastic":
-          botResponse = `Wow, "${input}" again? Here's what the doc *thinks*: ${botResponse} 🙄`;
+          botResponse = `Wow, "${trimmedInput}" again? Here's what the doc *thinks*: ${botResponse} 🙄`;
           break;
         case "Motivational":
-          botResponse = `Keep up the curiosity! About "${input}": ${botResponse} 💪`;
+          botResponse = `Keep up the curiosity! About "${trimmedInput}": ${botResponse} 💪`;
           break;
         default:
-          botResponse = `You asked: "${input}". Here's what I think! 😊 ${botResponse}`;
+          botResponse = `You asked: "${trimmedInput}". Here's what I think! 😊 ${botResponse}`;
       }
 
       const docMsg = { type: "doc", text: botResponse };
       setMessages((prev) => [...prev, docMsg]);
     } catch (err) {
-      setMessages((prev) => [...prev, { type: "doc", text: "⚠️ Error talking to backend." }]);
+      setMessages((prev) => [
+        ...prev,
+        { type: "doc", text: "⚠️ Error talking to backend." },
+      ]);
     } finally {
       setIsTyping(false);
+      setPendingQuery(false);
     }
   };
 

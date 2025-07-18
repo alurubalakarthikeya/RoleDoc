@@ -28,4 +28,4 @@ async def upload_file(file: UploadFile = File(...)):
 @app.post("/query")
 async def query_document(query: str = Form(...), file_name: str = Form(...)):
     answer = query_vector_store(query, file_name)
-    return answer
+    return {"result": answer}  
