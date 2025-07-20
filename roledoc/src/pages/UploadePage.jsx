@@ -80,6 +80,7 @@ export default function UploadPage() {
           />
           <p>{file ? file.name : "Click or drag a file here to upload"}</p>
         </label>
+        <p className="subtitle">Note: pdf's work the best</p>
 
         {file && !uploading && (
           <button onClick={handleUpload} className="button-now">
