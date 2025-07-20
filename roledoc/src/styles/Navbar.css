@@ -56,7 +56,7 @@
 @media (max-width: 768px) {
   .hamburger {
     display: block;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #6b21a8;
     cursor: pointer;
     z-index: 999;
@@ -76,6 +76,12 @@
     gap: 40px;
     transition: right 0.3s ease-in-out;
     box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+  }
+
+  .nav-links a {
+    padding: 10px 70px;
+    width: 100%;
+    text-align: center;
   }
 
   .nav-links.open {

@@ -176,7 +176,7 @@ html, body {
 /* Left side */
 .chat-container {
   width: 350px;
-  background-color: #8e44ec;
+  background-color: #dab7ff;
   color: white;
   display: flex;
   flex-direction: column;
@@ -232,7 +232,7 @@ html, body {
 /* Left side */
 .chat-container {
   width: 350px;
-  background-color: #8e44ec;
+  background-color: #e9d5ff;
   color: white;
   display: flex;
   flex-direction: column;
