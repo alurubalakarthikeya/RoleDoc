@@ -1,18 +1,33 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UploadPage from "./pages/UploadePage";
 import ChatPage from "./pages/ChatPage";
-import "./styles/Chat.css"; // <-- Optional global styles
+import Preloader from "./pages/Preloader";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 6000); // 5s animation + 1s fade out
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="app-root">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<UploadPage />} />
-          <Route path="/chat" element={<ChatPage />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <>
+      {loading && <Preloader />}
+      {!loading && (
+        <div className="app-root fade-in">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<UploadPage />} />
+              <Route path="/chat" element={<ChatPage />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      )}
+    </>
   );
 }
 
