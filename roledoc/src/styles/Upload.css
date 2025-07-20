@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('../assets/trail.png') no-repeat center center fixed;
+  background: url('../assets/background.png');
   padding: 20px;
   color: white;
   box-sizing: border-box;
