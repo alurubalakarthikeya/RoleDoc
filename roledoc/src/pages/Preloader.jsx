@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Preloader.css';
-import logo from '../assets/logo-removebg-preview.png'; 
+import logo from '../assets/logoo.png'; 
 
 const Preloader = () => {
   return (

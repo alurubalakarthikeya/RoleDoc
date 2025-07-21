@@ -12,10 +12,7 @@ export default function AboutPage() {
         <div className="about-text">
           <h1>Meet RoleDoc</h1>
           <p>
-            RoleDoc is a smart document assistant that allows you to **upload, interact, and chat** with your documents like never before.
-          </p>
-          <p>
-            Designed with students, researchers, and professionals in mind, our AI-driven interface helps you save time, boost productivity, and make document navigation intuitive and interactive.
+            RoleDoc is a smart document assistant that allows you to upload, interact, and chat with your documents like never before.
           </p>
         </div>
         <div className="about-illustration">
@@ -24,6 +21,9 @@ export default function AboutPage() {
       </div>
 
       <div className="about-values">
+        <p>
+          Designed with students, researchers, and professionals in mind, our AI-driven interface helps you save time, boost productivity, and make document navigation intuitive and interactive.
+        </p>
         <h2>Why RoleDoc?</h2>
         <ul>
           <li>📄 Simple file upload with support for PDF, DOCX, and TXT</li>
@@ -32,7 +32,7 @@ export default function AboutPage() {
         </ul>
       </div>
 
-      <footer className="about-footer">Made with ❤️ by Carty • RoleDoc © 2025</footer>
+      <footer className="about-footer">Made by Bala Karthikeya Aluru • RoleDoc © 2025</footer>
     </div>
   );
 }

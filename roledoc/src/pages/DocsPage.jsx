@@ -11,7 +11,7 @@ export default function DocsPage() {
       <div className="hero">
       <section className="docs-hero">
         <div className="docs-text">
-          <h1>Documentation</h1>
+          <h1>Documentation.</h1>
           <p>Your go-to guide for working with RoleDoc.</p>
         </div>
         <div className="docs-illustration">

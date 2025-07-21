@@ -12,9 +12,8 @@
   align-items: center;
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  margin: 2rem auto;
-  max-width: 1200px;
+  max-width: 1300px;
+  width: 100%;
 }
 
 .about-text {
@@ -22,12 +21,13 @@
 }
 
 .about-text h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
+    color: #9333ea;
 }
 
 .about-text p {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   line-height: 1.6;
   color: #444;
   margin-bottom: 1rem;
@@ -38,15 +38,15 @@
 }
 
 .about-values {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #fff;
   border-radius: 10px;
 }
 
 .about-values h2 {
   margin-bottom: 1rem;
+    color: #9333ea;
 }
 
 .about-values ul {
@@ -63,5 +63,18 @@
   text-align: center;
   padding: 2rem;
   font-size: 0.9rem;
-  color: #888;
+  color: #9333ea;
 }
+
+@media (max-width: 768px){
+  .about-hero{
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+  }
+
+  .about-illustration img {
+  max-width: 400px;
+  width: 100%;
+}
+} 
