@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UploadPage from "./pages/UploadePage";
 import ChatPage from "./pages/ChatPage";
 import Preloader from "./pages/Preloader";
+import AboutPage from "./pages/AboutPage";
+import DocsPage from "./pages/DocsPage";
+import "./App.css"; // Ensure this file exists for global styles
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -10,7 +13,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 6000); // 5s animation + 1s fade out
+    }, 2000); // 5s animation + 1s fade out
     return () => clearTimeout(timer);
   }, []);
 
@@ -22,7 +25,10 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<UploadPage />} />
+              <Route path="/upload" element={<UploadPage />} />
               <Route path="/chat" element={<ChatPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/docs" element={<DocsPage />} />
             </Routes>
           </BrowserRouter>
         </div>

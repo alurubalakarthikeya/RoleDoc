@@ -1,0 +1,67 @@
+.about-page {
+  background: #f9f9f9;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  padding-top: 80px;
+}
+
+.about-hero {
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem 5%;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin: 2rem auto;
+  max-width: 1200px;
+}
+
+.about-text {
+  max-width: 600px;
+}
+
+.about-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+.about-illustration img {
+  max-width: 400px;
+}
+
+.about-values {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.about-values h2 {
+  margin-bottom: 1rem;
+}
+
+.about-values ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.about-values li {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.about-footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  color: #888;
+}
