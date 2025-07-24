@@ -182,7 +182,7 @@ function getNextErrorMessage() {
             {pendingQuery ? "..." : "Send"}
           </button>
         </div>
-
+      </div>
       <div className="doc-container">
         <div className="doc-header"> {fileName}</div>
         <div className="doc-content">
