@@ -5,7 +5,7 @@ import ChatPage from "./pages/ChatPage";
 import Preloader from "./pages/Preloader";
 import AboutPage from "./pages/AboutPage";
 import DocsPage from "./pages/DocsPage";
-import "./App.css"; // Ensure this file exists for global styles
+import "./App.css"; 
 
 function App() {
   const [loading, setLoading] = useState(true);
