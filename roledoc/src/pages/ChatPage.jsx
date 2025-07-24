@@ -182,17 +182,6 @@ function getNextErrorMessage() {
             {pendingQuery ? "..." : "Send"}
           </button>
         </div>
-        <div ref={containerRef} id="cylinder" className="back-to-top" style={{ position: "relative" }}>
-            <a href="#">
-              <i
-                className="fa-solid fa-arrow-up"
-                id="arrow"
-                ref={arrowRef}
-                style={{ position: "absolute" }}
-              ></i>
-            </a>
-          </div>
-      </div>
 
       <div className="doc-container">
         <div className="doc-header"> {fileName}</div>

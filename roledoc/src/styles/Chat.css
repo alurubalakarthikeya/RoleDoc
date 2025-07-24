@@ -73,7 +73,7 @@ html, body {
   margin-bottom: 1rem;
   max-width: 75%;
   line-height: 1.4;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .message-bubble {
@@ -361,45 +361,4 @@ select:focus {
   gap: 0.75rem;
   border-radius: 15px 15px 0 0 ;
 }
-
-}
-
-.back-to-top {
-  position: sticky;
-  top: -3%;
-  right: -85%;
-  background-color: rgba(168, 85, 247, 0.4);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 10px rgba(168, 85, 247, 0.2);
-  border: 2px solid rgba(168, 85, 247, 0.8);
-  padding: 7px;
-  border-radius: 25px;
-  width: 16px; 
-  height: 60px; 
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  overflow: hidden; 
-  z-index: 99999999999;
-}
-
-.back-to-top a {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  height: 100%; 
-  width: 100%;
-  color: white;
-  text-decoration: none;
-}
-
-.back-to-top i {
-  font-size: 1.7vh;
-  position: absolute; 
-  top: 0;
-  transition: top 0.1s ease-in-out; 
-  background-color: #a855f7;
-  border-radius: 50%;
-  padding: 6.5px 5px;
 }
