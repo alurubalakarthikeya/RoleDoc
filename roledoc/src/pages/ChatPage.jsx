@@ -1,4 +1,3 @@
-// src/pages/ChatPage.jsx
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../styles/Chat.css";
@@ -20,7 +19,7 @@ export default function ChatPage() {
   const chatRef = useRef(null);
 
   const handleSend = async () => {
-    if (!input.trim() || pendingQuery) return; // Prevent sending if waiting for reply
+    if (!input.trim() || pendingQuery) return;
 
     const userMsg = { type: "user", text: input };
     setMessages((prev) => [...prev, userMsg]);
@@ -41,29 +40,34 @@ export default function ChatPage() {
       const data = await response.json();
       let botResponse = data?.result || "Sorry, I couldn't find an answer.";
 
-      const trimmedInput = input.trim(); // Trim input for cleaner reply
+      if (data?.error) {
+        console.warn("Backend Error:", data.details || data.error);
+        botResponse = `⚠️ Backend Error: ${data.error}`;
+      }
 
-      // Style it with persona
+      const trimmedInput = input.trim();
+
       switch (persona) {
         case "Formal":
-          botResponse = `You asked: "${trimmedInput}". Here is what I found: ${botResponse}`;
+          botResponse = ` ${botResponse}`;
           break;
         case "Sarcastic":
-          botResponse = `Wow, "${trimmedInput}" again? Here's what the doc *thinks*: ${botResponse} 🙄`;
+          botResponse = `${botResponse} 🙄`;
           break;
         case "Motivational":
-          botResponse = `Keep up the curiosity! About "${trimmedInput}": ${botResponse} 💪`;
+          botResponse = ` ${botResponse} 💪`;
           break;
         default:
-          botResponse = `You asked: "${trimmedInput}". Here's what I think! 😊 ${botResponse}`;
+          botResponse = ` ${botResponse}`;
       }
 
       const docMsg = { type: "doc", text: botResponse };
       setMessages((prev) => [...prev, docMsg]);
     } catch (err) {
+      console.error("Request failed:", err);
       setMessages((prev) => [
         ...prev,
-        { type: "doc", text: "⚠️ Error talking to backend." },
+        { type: "doc", text: "⚠️ Error connecting to backend. Please try again." },
       ]);
     } finally {
       setIsTyping(false);
@@ -117,16 +121,16 @@ export default function ChatPage() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
+            disabled={pendingQuery}
           />
-          <button onClick={handleSend} className="send-btn">
-            Send
+          <button onClick={handleSend} className="send-btn" disabled={pendingQuery}>
+            {pendingQuery ? "..." : "Send"}
           </button>
         </div>
       </div>
 
-      {/* Right - Document Viewer */}
       <div className="doc-container">
-        <div className="doc-header">📄 {fileName}</div>
+        <div className="doc-header"> {fileName}</div>
         <div className="doc-content">
           {fileUrl ? (
             <iframe

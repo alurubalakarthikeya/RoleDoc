@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000); // 5s animation + 1s fade out
+    }, 2000); 
     return () => clearTimeout(timer);
   }, []);
 
