@@ -2,14 +2,16 @@
 
 **RoleDoc** is an AI-powered document chatbot that allows users to **chat with their documents**. Upload a PDF, DOCX, or TXT file, and RoleDoc turns it into a conversational agent using persona-based responses. Ideal for quick information lookup and intuitive interaction with large documents.
 
-> Currently in development — GPT integration!<br>
+> Currently in development — Mistral integration training!<br>
 
 
 ## Tech Stack:
 
-- **Frontend**: React.js, Tailwind CSS  
+- **Frontend**: React.js, CSS  
 - **Routing**: React Router DOM  
-- **Backend**: Node.js with OpenAI API
+- **Backend**: Python with FastAPI, FAISS
+- **Model**: Mistral LLM (through api)
+- **Deployment**: Render
 
 
 ## Features:
