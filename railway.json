@@ -1,0 +1,7 @@
+{
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "pip install -r backend/requirements.txt",
+    "startCommand": "cd backend && ./start.sh"
+  }
+}
