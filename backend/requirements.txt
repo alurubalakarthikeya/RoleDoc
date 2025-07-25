@@ -9,3 +9,4 @@ sentence_transformers==5.0.0
 scikit-learn>=0.24.0
 torch>=1.13.0
 uvicorn
+gunicorn
