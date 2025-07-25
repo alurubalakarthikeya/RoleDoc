@@ -31,7 +31,6 @@ html, body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 2px solid #a44fff;
   color: #8e44ec;
 }
 
